@@ -22,7 +22,7 @@
 #  
 #  
 
-import Image
+from PIL import Image
 
 class lsb_stegno:
 	def __init__(self, image_path):
@@ -31,11 +31,8 @@ class lsb_stegno:
 		self.mode = self.im.mode
 		self.new_im =  self.im.load()
 	
-	def text2binary(self,text):
-		res = ''
-		for i in range(len(text)):
-			res += str(bin(ord(text[i]))[2:].zfill(8))
-		return res
+	def text2binary(self, text):
+                return ''.join(map(lambda x:bin(ord(x))[2:].zfill(8), text))
 	
 	def text_encode(self, text):
 		
@@ -66,7 +63,6 @@ class lsb_stegno:
 			
 		self.im.save("new_image.png")
 def main():
-	print 'USAGE: LIKE THIS'
 	lsb = lsb_stegno("image.png")
 	lsb.text_encode("SomeText")
 	
