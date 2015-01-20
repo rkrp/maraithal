@@ -4,12 +4,15 @@
 from PIL import Image
 import random
 from itertools import izip
+from sys import argv
+from getpass import getpass
 
 class lsb_stegno:
     #Channel to encode or decode
     C_RED, C_GREEN, C_BLUE, C_ALPHA = range(4)
 
     def __init__(self, image_path):
+        self.im_path = image_path
         self.im = Image.open(image_path)
         self.width, self.height = self.im.size
         self.mode = self.im.mode
@@ -55,6 +58,7 @@ class lsb_stegno:
             raise Exception ("Error: Insufficient Size - Choose a larger image")
 
         pos = self.shuffle_k(key)
+
         for bit, l_addr in izip(payload, pos):
             #Translate linear pos to row/col address
             addr = self.lin2rowcol(l_addr)
@@ -68,14 +72,48 @@ class lsb_stegno:
             else:
                 pixel[mode] &= ~1
 
-            self.new_im[addr] = tuple(pixel)
-        self.im.save("new_image.png")
+            self.new_im[addr[0], addr[1]] = tuple(pixel)
+        self.im.save(''.join(self.im_path.split('.')[:-1]) + '.enc.png')
+
+    """
+    Decoding of the encoded text in self.text_encode() is done here
+    Method is directly invoked from the application
+    """
+    def text_decode(self, key, mode=C_RED):
+        pos = self.shuffle_k(key)
+        
+        #Iterate over chunks of 8
+        chunk = lambda x: pos[(x * 8) : (x * 8) + 8]
+        #Get the LSB value from an address
+        get_val = lambda addr: str(self.im.getpixel(addr)[mode] & 1)
+        
+        i = 0
+        res = ''
+        while(True):
+            addrs = map(self.lin2rowcol, chunk(i))
+            data = ''.join(map(get_val, addrs))
+            char = chr(int(data, 2))
+            if char != '\x00':
+                res += char
+            else:
+                return res
+            i += 1
 
 def main():
-    lsb = lsb_stegno("image.png")
-    lsb.text_encode("someplaintext", "somekey")
+	try:
+		lsb = lsb_stegno(argv[2])
+		if argv[1] == 'e':
+			print 'Message:',
+			message = raw_input()
+			key = getpass()
+			lsb.text_encode(message, key)
+		elif argv[1] == 'd':
+			key = getpass()
+			print lsb.text_decode(key)
+	except IndexError:
+		print "Invalid number of arguments"
+		return 1
 
-    return 0
 
 if __name__ == '__main__':
     main()
