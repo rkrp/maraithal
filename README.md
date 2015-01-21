@@ -1,5 +1,7 @@
 LSB-Steganography
 ================
+[![Build Status](https://img.shields.io/travis/rkrp/lsb-steganography.svg)](https://travis-ci.org/rkrp/lsb-steganography)
+[![License](https://img.shields.io/badge/license-GPLv3-blue.svg)](https://github.com/rkrp/lsb-steganography)
 
 Implementation of basic LSB steganography on PNG images
 
@@ -13,4 +15,3 @@ Stable.
 - [ ] Binary input support
 - [ ] Support for encrypting and hiding the cipher in the image
 - [ ] Add support for non-PNG images
-
