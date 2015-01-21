@@ -3,6 +3,7 @@
 
 from PIL import Image
 import random
+import argparse
 from itertools import izip
 from sys import argv
 from getpass import getpass
@@ -100,20 +101,23 @@ class lsb_stegno:
             i += 1
 
 def main():
-	try:
-		lsb = lsb_stegno(argv[2])
-		if argv[1] == 'e':
-			print 'Message:',
-			message = raw_input()
-			key = getpass()
-			lsb.text_encode(message, key)
-		elif argv[1] == 'd':
-			key = getpass()
-			print lsb.text_decode(key)
-	except IndexError:
-		print "Invalid number of arguments"
-		return 1
+    parser = argparse.ArgumentParser()
+    parser.add_argument('mode', help='enc or dec to encode or decode text respectively')
+    parser.add_argument('image', help='Path to PNG image to be used')
+    parser.add_argument('--message-file', help='File to read text from')
+    parser.add_argument('--passphrase', help='Passphrase to use while encoding or decoding')
+    args = parser.parse_args()
 
+    if args.mode == 'enc':
+        lsb = lsb_stegno(args.image)
+        key = args.passphrase if args.passphrase else getpass()
+        print 'Message:',
+        text = raw_input()
+        lsb.text_encode(text, key)
+    elif args.mode == 'dec':
+        lsb = lsb_stegno(args.image)
+        key = args.passphrase if args.passphrase else getpass()
+        print lsb.text_decode(key)
 
 if __name__ == '__main__':
     main()
