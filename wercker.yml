@@ -14,7 +14,7 @@ build:
     #     python_location: /usr/bin/python3.2
 
     # A step that executes `pip install` command.
-    - pip-install
+    - pip-install:
         package: pillow
 
     # # This pip-install clears the local wheel cache
@@ -26,5 +26,6 @@ build:
     - script:
         name: run nose tests
         code: nosetests
+
 
 
