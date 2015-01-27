@@ -7,6 +7,12 @@ Implementation of basic LSB steganography on PNG images
 
 Stable.
 
+##Installation
+It can be installed easily using pip or easy_install. 
+```
+sudo pip install maraitha;
+```
+
 ##To Do:
 - [x] Pseudo random LSB mod pattern, instead of single pattern.
 - [x] Clean up main()
@@ -16,3 +22,4 @@ Stable.
 - [ ] Support for encrypting and hiding the cipher in the image
 - [ ] Add support for non-PNG images
 - [x] Package structure reorganization.
+- [x] Submit package to pypi
