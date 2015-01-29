@@ -2,7 +2,7 @@ Maraithal
 ================
 [![Build Status](https://img.shields.io/travis/rkrp/maraithal.svg)](https://travis-ci.org/rkrp/maraithal)
 [![License](https://img.shields.io/badge/license-GPLv3-blue.svg)](https://github.com/rkrp/lsb-steganography)
-[![Downloads](https://img.shields.io/pypi/dm/maraithal.svg)](https://pypi.python.org/pypi/maraithal/0.3)
+[![Downloads](https://img.shields.io/pypi/dm/maraithal.svg)](https://pypi.python.org/pypi/maraithal)
 
 Implementation of basic LSB steganography on PNG images
 
@@ -11,7 +11,7 @@ Stable.
 ##Installation
 It can be installed easily using pip or easy_install. 
 ```
-sudo pip install maraitha;
+sudo pip install maraithal
 ```
 
 ##To Do:
