@@ -9,11 +9,17 @@ config = {
     'url': 'https://github.com/rkrp/maraithal',
     'download_url': 'https://github.com/rkrp/maraithal',
     'author_email': 'krp@gtux.in',
-    'version': '0.3',
+    'version': '0.4',
     'install_requires': ['pillow'],
     'packages': ['maraithal'],
     'scripts': [],
-    'name': 'maraithal'
+    'name': 'maraithal',
+    'license' : 'GPLv3',
+#    'classifiers' : {
+#        'Development Status :: 4 - Beta',
+#        'Topic :: Security',
+#        'Topic :: Security :: Cryptography',
+#        },
 }
 
 setup(**config)
