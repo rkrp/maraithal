@@ -5,11 +5,15 @@
 Module to encode/decode data in the least significant bits
 in PNG images
 """
-
+from __future__ import print_function
 from PIL import Image
 import random
 import argparse
-from itertools import izip
+try:
+    from itertools import izip
+except ImportError:
+    izip = zip
+    raw_input = input
 from getpass import getpass
 
 class LSBStegano(object):
@@ -33,8 +37,8 @@ class LSBStegano(object):
         Linear to row/col address translator
         Returns a tuple with row/col address
         """
-        row = lin / self.width
-        col = lin - (row * self.width)
+        row = int(lin / self.width)
+        col = lin - int(row * self.width)
         return (col, row)
 
     def shuffle_k(self, key):
@@ -43,7 +47,7 @@ class LSBStegano(object):
         You have been warned!!
         """
         length = self.height * self.width
-        lin_pos = range(length)
+        lin_pos = list(range(length))
 
         random.seed(key)
         random.shuffle(lin_pos)
@@ -122,13 +126,13 @@ def main():
     if args.mode == 'enc':
         lsb = LSBStegano(args.image)
         key = args.passphrase if args.passphrase else getpass()
-        print 'Message:',
+        print('Message:', end='')
         text = raw_input()
         lsb.text_encode(text, key)
     elif args.mode == 'dec':
         lsb = LSBStegano(args.image)
         key = args.passphrase if args.passphrase else getpass()
-        print lsb.text_decode(key)
+        print(lsb.text_decode(key))
 
 if __name__ == '__main__':
     main()

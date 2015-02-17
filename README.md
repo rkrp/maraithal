@@ -4,7 +4,7 @@ Maraithal
 [![License](https://img.shields.io/badge/license-GPLv3-blue.svg)](https://github.com/rkrp/lsb-steganography)
 [![Downloads](https://img.shields.io/pypi/dm/maraithal.svg)](https://pypi.python.org/pypi/maraithal)
 
-Implementation of basic LSB steganography on PNG images
+Implementation of basic LSB steganography on PNG images. Runs on both Python 2 and Python 3.
 
 Stable.
 
@@ -15,7 +15,7 @@ sudo pip install maraithal
 ```
 
 ##To Do:
-- [ ] Python 3 Support
+- [x] Python 3 Support
 - [x] Pseudo random LSB mod pattern, instead of single pattern.
 - [x] Clean up main()
 - [x] Message decoding from key
