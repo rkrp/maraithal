@@ -8,13 +8,12 @@ in PNG images
 from __future__ import print_function
 from PIL import Image
 import random
-import argparse
+
 try:
     from itertools import izip
 except ImportError:
     izip = zip
     raw_input = input
-from getpass import getpass
 
 class LSBStegano(object):
     """
@@ -112,27 +111,3 @@ class LSBStegano(object):
                 return res
             i += 1
 
-def main():
-    """
-    Main function for app
-    """
-    parser = argparse.ArgumentParser()
-    parser.add_argument('mode', help='enc or dec to encode or decode text respectively')
-    parser.add_argument('image', help='Path to PNG image to be used')
-    parser.add_argument('--message-file', help='File to read text from')
-    parser.add_argument('--passphrase', help='Passphrase to use while encoding or decoding')
-    args = parser.parse_args()
-
-    if args.mode == 'enc':
-        lsb = LSBStegano(args.image)
-        key = args.passphrase if args.passphrase else getpass()
-        print('Message:', end='')
-        text = raw_input()
-        lsb.text_encode(text, key)
-    elif args.mode == 'dec':
-        lsb = LSBStegano(args.image)
-        key = args.passphrase if args.passphrase else getpass()
-        print(lsb.text_decode(key))
-
-if __name__ == '__main__':
-    main()

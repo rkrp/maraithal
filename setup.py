@@ -9,10 +9,10 @@ config = {
     'url': 'https://github.com/rkrp/maraithal',
     'download_url': 'https://github.com/rkrp/maraithal',
     'author_email': 'krp@gtux.in',
-    'version': '0.4',
+    'version': '0.5',
     'install_requires': ['pillow'],
     'packages': ['maraithal'],
-    'scripts': [],
+    'scripts': ['bin/maraithal'],
     'name': 'maraithal',
     'license' : 'GPLv3',
 #    'classifiers' : {
